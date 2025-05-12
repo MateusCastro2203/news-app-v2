@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import React, { useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
+import { OnboardingScreen } from "@/components/OnboardingScreen";
+import { useOnboardingStore } from "./src/store/onboarding";
+import { AppNavigator } from "@/navigation/AppNavigator";
+// import "./global.css";
+//import { initializeStorage } from "@/services/useOfflineStorage";
+import { useToast } from "@/hooks/useToast";
+import { Toast } from "@/components/Toast";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 export default function App() {
+  const isFirstTime = useOnboardingStore((state) => state.isFirstTime);
+  // useEffect(() => {
+  //   initializeStorage();
+  // }, []);
+  const { isVisible, message, type, hideToast } = useToast();
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <NavigationContainer>
+          <StatusBar style="dark" />
+          {isFirstTime ? <OnboardingScreen /> : <AppNavigator />}
+          {isVisible && (
+            <Toast message={message} type={type} onHide={hideToast} />
+          )}
+        </NavigationContainer>
+      </SafeAreaView>
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
