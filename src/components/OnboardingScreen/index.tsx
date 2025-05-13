@@ -68,7 +68,7 @@ export function OnboardingScreen() {
       <View style={styles.formContainer}>
         <Text style={styles.formTitle}>Seus dados</Text>
 
-        <Text style={styles.inputLabel}>Nome</Text>
+        <Text style={styles.inputLabel}>Seu Nome</Text>
         <TextInput
           style={styles.input}
           placeholder="Digite seu nome"
