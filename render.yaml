@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: expo-server
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm install -g expo-cli && npx expo start --tunnel --no-dev --minify
+    envVars:
+      - key: NODE_VERSION
+        value: 18.16.1
+      - key: REACT_NATIVE_PACKAGER_HOSTNAME
+        sync: false
