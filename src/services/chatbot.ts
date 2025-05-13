@@ -3,7 +3,7 @@ import { User } from "@/store/types/user.types";
 import { ChatResponse } from "@/types/chat.types";
 import axios from "axios";
 
-const API_URL = "http://newsapp-ai-api-production.up.railway.app";
+const API_URL = "https://newsapp-ai-api-production.up.railway.app";
 
 export interface ChatActionResponse {
   response: string;
