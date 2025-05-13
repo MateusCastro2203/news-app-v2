@@ -63,9 +63,17 @@ export const registerUser = async (
   email: string
 ): Promise<User> => {
   try {
-    const response = await axios.post(`${API_URL}/user`, {
+    const response = await axios({
+      method: 'POST',
+      url: `${API_URL}/user`, 
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      data: JSON.stringify({
       name,
       email,
+      })
     });
     return response.data;
   } catch (error) {
