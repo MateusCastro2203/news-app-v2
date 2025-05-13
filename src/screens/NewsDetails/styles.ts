@@ -45,7 +45,7 @@ export const createStyles = (isDarkTheme: boolean) =>
     buttonRow: {
       flexDirection: "row",
       justifyContent: "space-between",
-      width: "33%",
+      width: "25%",
     },
     authorRow: {
       flexDirection: "row",

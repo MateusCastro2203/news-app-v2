@@ -15,6 +15,7 @@ import {
 import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { useTheme } from "@/contexts/ThemeContext";
 import { createStyles } from "./styles";
+import { ResetFavoritesButton } from "@/components/resetFavorites/ResetFavorite";
 
 type FavoritesNavigationProp = CompositeNavigationProp<
   DrawerNavigationProp<RootDrawerParamList, "Favorites">,
@@ -44,7 +45,6 @@ export function FavoritesScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.contentContainer}>
-        <Text style={styles.title}>Favoritos</Text>
         <FlatList
           data={savedNews}
           renderItem={({ item }) => {
@@ -58,9 +58,10 @@ export function FavoritesScreen() {
               />
             );
           }}
-          keyExtractor={(item) => item.article_id}
+          keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContent}
         />
+        <ResetFavoritesButton />
       </View>
     </SafeAreaView>
   );

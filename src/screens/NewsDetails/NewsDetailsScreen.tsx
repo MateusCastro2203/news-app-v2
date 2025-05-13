@@ -71,7 +71,7 @@ export const NewsDetailsScreen = () => {
         )}
         <WebView
           style={{ marginTop: Constants.statusBarHeight }}
-          source={{ uri: article.link }}
+          source={{ uri: article.url }}
           onLoadStart={() => setLoading(true)}
           onLoadEnd={() => setLoading(false)}
         />
@@ -96,15 +96,17 @@ export const NewsDetailsScreen = () => {
           </View>
           <View style={styles.authorRow}>
             <Text style={styles.authorText}>
-              {article.creator
-                ? `Por ${article.creator}`
+              {article.source_name
+                ? `Por ${article.source_name}`
                 : "Autor desconhecido"}
             </Text>
             <Text style={styles.dateText}>
-              {new Date(article.pubDate).toLocaleDateString()}
+              {new Date(article.published_at).toLocaleDateString()}
             </Text>
           </View>
-          <Text style={styles.description}>{article.description}</Text>
+          <Text style={styles.description} numberOfLines={3}>
+            {article.description}
+          </Text>
           <TouchableOpacity onPress={toggleChat} style={styles.chatButton}>
             <Text style={styles.buttonText}>
               Perguntar ao Scooby sobre esta notícia
@@ -124,9 +126,9 @@ export const NewsDetailsScreen = () => {
         <Text style={styles.footerText}>
           Categoria: {article.category.join(", ")}
         </Text>
-        <Text style={styles.footerText}>
+        {/* <Text style={styles.footerText}>
           País: {article.country.join(", ")}
-        </Text>
+        </Text> */}
       </View>
     </View>
   );

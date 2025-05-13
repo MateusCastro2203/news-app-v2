@@ -9,7 +9,10 @@ interface ThemeContextType {
   toggleTheme: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+// Exportar o ThemeContext
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined
+);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const deviceTheme = useColorScheme() as Theme;

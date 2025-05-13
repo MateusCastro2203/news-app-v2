@@ -41,12 +41,12 @@ function DrawerNavigator() {
         drawerType: "front",
         drawerStyle: {
           width: "75%",
-          backgroundColor: isDarkTheme ? "#1f2937" : "#ffffff",
+          backgroundColor: isDarkTheme ? "#111827" : "#f1f5f9",
         },
         headerStyle: {
-          backgroundColor: isDarkTheme ? "#1f2937" : "#ffffff",
+          backgroundColor: isDarkTheme ? "#111827" : "#f1f5f9",
         },
-        headerTintColor: isDarkTheme ? "#ffffff" : "#000000",
+        headerTintColor: isDarkTheme ? "#f1f5f9" : "#000000",
       }}
     >
       <Drawer.Screen
@@ -98,9 +98,9 @@ export const AppNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: isDarkTheme ? "#1f2937" : "#ffffff",
+          backgroundColor: isDarkTheme ? "#111827" : "#f1f5f9",
         },
-        headerTintColor: isDarkTheme ? "#ffffff" : "#000000",
+        headerTintColor: isDarkTheme ? "#f1f5f9" : "#000000",
       }}
     >
       <Stack.Screen

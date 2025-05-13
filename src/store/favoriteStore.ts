@@ -19,14 +19,15 @@ export const useFavoriteStore = create<FavoritesStore>()(
       },
       removeFromFavorites: (articleId: string) => {
         set((state) => ({
-          savedNews: state.savedNews.filter(
-            (news) => news.article_id !== articleId
-          ),
+          savedNews: state.savedNews.filter((news) => news.id !== articleId),
         }));
       },
       isFavorite: (articleId: string) => {
         const state = get();
-        return state.savedNews.some((news) => news.article_id === articleId);
+        return state.savedNews.some((news) => news.id === articleId);
+      },
+      clearFavorites: () => {
+        set({ savedNews: [] });
       },
     }),
     {

@@ -1,34 +1,50 @@
 import "react-native-gesture-handler";
-import React, { useEffect } from "react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { StatusBar } from "expo-status-bar";
 import { OnboardingScreen } from "@/components/OnboardingScreen";
 import { useOnboardingStore } from "./src/store/onboarding";
 import { AppNavigator } from "@/navigation/AppNavigator";
-// import "./global.css";
-//import { initializeStorage } from "@/services/useOfflineStorage";
 import { useToast } from "@/hooks/useToast";
 import { Toast } from "@/components/Toast";
-import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
+
+// Componente separado que usa o hook useTheme
+const AppContent = ({ isFirstTime, toastProps }) => {
+  // Agora useTheme é seguro porque está dentro do ThemeProvider
+  const { theme } = useTheme();
+  const isDarkTheme = theme === "dark";
+
+  return (
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: isDarkTheme ? "#111827" : "#f1f5f9",
+      }}
+    >
+      <NavigationContainer>
+        <StatusBar style={isDarkTheme ? "light" : "dark"} />
+        {isFirstTime ? <OnboardingScreen /> : <AppNavigator />}
+        {toastProps.isVisible && (
+          <Toast
+            message={toastProps.message}
+            type={toastProps.type}
+            onHide={toastProps.hideToast}
+          />
+        )}
+      </NavigationContainer>
+    </SafeAreaView>
+  );
+};
 
 export default function App() {
   const isFirstTime = useOnboardingStore((state) => state.isFirstTime);
-  // useEffect(() => {
-  //   initializeStorage();
-  // }, []);
-  const { isVisible, message, type, hideToast } = useToast();
+  const toastProps = useToast();
+
   return (
     <ThemeProvider>
-      <SafeAreaView style={{ flex: 1 }}>
-        <NavigationContainer>
-          <StatusBar style="dark" />
-          {isFirstTime ? <OnboardingScreen /> : <AppNavigator />}
-          {isVisible && (
-            <Toast message={message} type={type} onHide={hideToast} />
-          )}
-        </NavigationContainer>
-      </SafeAreaView>
+      <AppContent isFirstTime={isFirstTime} toastProps={toastProps} />
     </ThemeProvider>
   );
 }

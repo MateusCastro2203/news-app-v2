@@ -18,11 +18,12 @@ export function FavoriteButton({
 }: FavoriteButtonProps) {
   const { isFavorite, addToFavorites, removeFromFavorites } =
     useFavoriteStore();
-  const isFavorited = isFavorite(article.article_id);
+  const isFavorited = isFavorite(article.id);
 
   const toggleFavorite = () => {
+    console.log("isFavorited", article.id, isFavorited);
     if (isFavorited) {
-      removeFromFavorites(article.article_id);
+      removeFromFavorites(article.id);
     } else {
       addToFavorites(article);
     }

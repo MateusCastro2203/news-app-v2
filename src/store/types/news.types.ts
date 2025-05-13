@@ -25,4 +25,5 @@ export interface FavoritesStore {
   addToFavorites: (news: NewsResult) => void;
   removeFromFavorites: (articleId: string) => void;
   isFavorite: (articleId: string) => boolean;
+  clearFavorites: () => void;
 }

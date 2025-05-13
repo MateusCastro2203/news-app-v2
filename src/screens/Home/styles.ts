@@ -4,7 +4,7 @@ export const createStyles = (isDarkTheme: boolean) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: isDarkTheme ? "#1e1e1e" : "#f1f5f9",
+      backgroundColor: isDarkTheme ? "#111827" : "#f1f5f9",
     },
     content: {
       width: "100%",
